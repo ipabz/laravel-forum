@@ -21,5 +21,12 @@
     },
     "suggest": {
         "riari/laravel-forum-frontend": "The standard forum frontend that provides views written with Bootstrap 4"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Riari\\Forum\\ForumServiceProvider"
+            ]
+        }
     }
 }
