@@ -66,7 +66,7 @@ class ForumPolicy
      */
     public function viewTrashedThreads($user)
     {
-        return true;
+        return false;
     }
 
     /**
@@ -77,6 +77,6 @@ class ForumPolicy
      */
     public function viewTrashedPosts($user)
     {
-        return true;
+        return false;
     }
 }
