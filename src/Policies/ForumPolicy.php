@@ -10,7 +10,7 @@ class ForumPolicy
      */
     public function createCategories($user)
     {
-        return true;
+        return $user->hasRole('ROLE_ADMIN');
     }
 
     /**
