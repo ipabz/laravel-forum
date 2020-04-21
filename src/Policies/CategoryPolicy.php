@@ -13,7 +13,7 @@ class CategoryPolicy
      */
     public function createThreads($user, Category $category)
     {
-        return $user->hasRole('ROLE_ADMIN');
+        return true;
     }
 
     /**
