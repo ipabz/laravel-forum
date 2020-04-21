@@ -33,7 +33,7 @@ class ForumPolicy
      */
     public function moveCategories($user)
     {
-        return true;
+        return $user->hasRole('ROLE_ADMIN');
     }
 
     /**
@@ -44,7 +44,7 @@ class ForumPolicy
      */
     public function renameCategories($user)
     {
-        return true;
+        return $user->hasRole('ROLE_ADMIN');
     }
 
     /**

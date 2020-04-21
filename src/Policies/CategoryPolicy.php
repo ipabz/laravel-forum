@@ -13,7 +13,7 @@ class CategoryPolicy
      */
     public function createThreads($user, Category $category)
     {
-        return true;
+        return $user->hasRole('ROLE_ADMIN');
     }
 
     /**
@@ -125,6 +125,6 @@ class CategoryPolicy
      */
     public function delete($user, Category $category)
     {
-        return true;
+        return $user->hasRole('ROLE_ADMIN');
     }
 }
