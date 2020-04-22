@@ -14,7 +14,7 @@ class ThreadPolicy
      */
     public function deletePosts($user, Thread $thread)
     {
-        return true;
+        return $user->hasRole('ROLE_ADMIN');
     }
 
     /**

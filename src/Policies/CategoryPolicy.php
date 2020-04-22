@@ -41,7 +41,7 @@ class CategoryPolicy
      */
     public function deleteThreads($user, Category $category)
     {
-        return true;
+        return $user->hasRole('ROLE_ADMIN');
     }
 
     /**
