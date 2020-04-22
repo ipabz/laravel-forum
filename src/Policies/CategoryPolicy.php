@@ -65,7 +65,7 @@ class CategoryPolicy
      */
     public function moveThreadsFrom($user, Category $category)
     {
-        return true;
+        return false;
     }
 
     /**
@@ -77,7 +77,7 @@ class CategoryPolicy
      */
     public function moveThreadsTo($user, Category $category)
     {
-        return true;
+        return false;
     }
 
     /**
@@ -89,7 +89,7 @@ class CategoryPolicy
      */
     public function lockThreads($user, Category $category)
     {
-        return true;
+        return false;
     }
 
     /**
@@ -101,7 +101,7 @@ class CategoryPolicy
      */
     public function pinThreads($user, Category $category)
     {
-        return true;
+        return false;
     }
 
     /**
