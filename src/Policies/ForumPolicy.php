@@ -33,7 +33,7 @@ class ForumPolicy
      */
     public function moveCategories($user)
     {
-        return $user->hasRole('ROLE_ADMIN');
+        return false;
     }
 
     /**

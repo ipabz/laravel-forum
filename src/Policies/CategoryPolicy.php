@@ -53,7 +53,7 @@ class CategoryPolicy
      */
     public function enableThreads($user, Category $category)
     {
-        return true;
+        return false;
     }
 
     /**
