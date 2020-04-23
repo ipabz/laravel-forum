@@ -26,7 +26,7 @@ class ThreadPolicy
      */
     public function rename($user, Thread $thread)
     {
-        return $user->hasRole('ROLE_ADMIN') || $user->getKey() === $thread->author_id;
+        return false;
     }
 
     /**
