@@ -9,8 +9,8 @@ $r->group([
 {
     // Subscription
     $r->group(['prefix' => 'subscription', 'as' => 'subscription.'], function($r) {
-        $r->post('subscribe', ['as' => 'forum_subscribe', 'uses' => 'SubscriptionController@subscribe']);
-        $r->post('unsubscribe', ['as' => 'forum_unsubscribe', 'uses' => 'SubscriptionController@unsubscribe']);
+        $r->post('subscribe', ['as' => 'subscribe', 'uses' => 'SubscriptionController@subscribe']);
+        $r->post('unsubscribe', ['as' => 'unsubscribe', 'uses' => 'SubscriptionController@unsubscribe']);
     });
 
     // Categories

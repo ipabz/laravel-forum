@@ -50,6 +50,7 @@ class ForumServiceProvider extends ServiceProvider
         Carbon::setLocale($this->app->getLocale());
 
         $this->loadMigrationsFrom($this->baseDir() . 'migrations');
+        $this->loadTranslationsFrom($this->baseDir() . 'translations', 'forum');
     }
 
     /**
