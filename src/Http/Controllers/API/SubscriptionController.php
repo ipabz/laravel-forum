@@ -73,7 +73,9 @@ class SubscriptionController extends BaseController
             ->where('user_id', $request->input('user_id'))
             ->first();
 
-        $subscription->delete();
+        if (!$subscription) {
+            $subscription->delete();
+        }
 
         return $this->response($request->all());
     }
