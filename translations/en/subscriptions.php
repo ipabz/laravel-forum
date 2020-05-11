@@ -3,5 +3,6 @@
 return [
     'subscribe' => 'Subscribe',
     'unsubscribe' => 'Unsubscribe',
-    'success' => 'Successfully subscribed.',
+    'success_subscribed' => 'Successfully subscribed.',
+    'success_unsubscribed' => 'Successfully unsubscribed.',
 ];

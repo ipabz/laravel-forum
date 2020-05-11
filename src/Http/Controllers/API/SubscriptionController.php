@@ -52,7 +52,7 @@ class SubscriptionController extends BaseController
             ]));
         }
 
-        return $this->response($request->all());
+        return $this->response($subscription);
     }
 
     /**
@@ -73,10 +73,34 @@ class SubscriptionController extends BaseController
             ->where('user_id', $request->input('user_id'))
             ->first();
 
-        if (!$subscription) {
+        if ($subscription) {
             $subscription->delete();
         }
 
-        return $this->response($request->all());
+        return $this->response($subscription);
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse|\Illuminate\Http\Response
+     */
+    public function isSubscribed(Request $request)
+    {
+        $this->validate($request, [
+            'subscribable_id' => ['required'],
+            'subscribable_type' => ['required'],
+            'user_id' => ['required'],
+        ]);
+
+        $subscription = (new ForumSubscription())->newQuery()
+            ->where('subscribable_id', $request->input('subscribable_id'))
+            ->where('subscribable_type', $request->input('subscribable_type'))
+            ->where('user_id', $request->input('user_id'))
+            ->first();
+
+        return $this->response([
+            'is_subscribed' => ($subscription) ? 'yes' : 'no',
+            'subscription' => $subscription
+        ]);
     }
 }
