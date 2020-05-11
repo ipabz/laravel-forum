@@ -91,4 +91,12 @@ class Post extends BaseModel
             }
         }
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function subscription()
+    {
+        return $this->morphMany(ForumSubscription::class, 'subscribable');
+    }
 }

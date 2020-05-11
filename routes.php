@@ -7,6 +7,12 @@ $r->group([
     'middleware' => config('forum.routing.middleware', 'forum.api.auth')
 ], function ($r)
 {
+    // Subscription
+    $r->group(['prefix' => 'subscription', 'as' => 'subscription.'], function($r) {
+        $r->post('subscribe', ['as' => 'forum_subscribe', 'uses' => 'SubscriptionController@subscribe']);
+        $r->post('unsubscribe', ['as' => 'forum_unsubscribe', 'uses' => 'SubscriptionController@unsubscribe']);
+    });
+
     // Categories
     $r->group(['prefix' => 'category', 'as' => 'category.'], function ($r)
     {

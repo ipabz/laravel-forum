@@ -48,6 +48,8 @@ class ForumServiceProvider extends ServiceProvider
 
         // Make sure Carbon's locale is set to the application locale
         Carbon::setLocale($this->app->getLocale());
+
+        $this->loadMigrationsFrom($this->baseDir() . 'migrations');
     }
 
     /**
