@@ -38,7 +38,21 @@ class SubscriptionController extends BaseController
             'user_id' => ['required'],
         ]);
 
-        return $this->response(['subscribed']);
+        $subscription = (new ForumSubscription())->newQuery()
+            ->where('subscribable_id', $request->input('subscribable_id'))
+            ->where('subscribable_type', $request->input('subscribable_type'))
+            ->where('user_id', $request->input('user_id'))
+            ->first();
+
+        if (!$subscription) {
+            ForumSubscription::create($request->only([
+                'subscribable_id',
+                'subscribable_type',
+                'user_id',
+            ]));
+        }
+
+        return $this->response($request->all());
     }
 
     /**
@@ -53,6 +67,14 @@ class SubscriptionController extends BaseController
             'user_id' => ['required'],
         ]);
 
-        return $this->response(['unsubscribed']);
+        $subscription = (new ForumSubscription())->newQuery()
+            ->where('subscribable_id', $request->input('subscribable_id'))
+            ->where('subscribable_type', $request->input('subscribable_type'))
+            ->where('user_id', $request->input('user_id'))
+            ->first();
+
+        $subscription->delete();
+
+        return $this->response($request->all());
     }
 }
