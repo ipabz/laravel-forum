@@ -37,18 +37,18 @@ class NotifySubscribers extends Command
 
         $pendingNotifications->each(function ($notification) {
             $notification->status = 'processing';
-            // $notification->save();
+            $notification->save();
 
             $post = $notification->post;
             $subscriptions = $post->thread->subscription;
 
             $subscriptions->each(function ($subscription) use ($post) {
                 if ($post->author_id !== $subscription->user_id) {
-                    Mail::to($subscription->user)->send(new NewPostCreated($post, $subscription->user));
+                    Mail::to($subscription->user)->send(new NewPostCreated($post, $subscription->user, $subscription));
                 }
             });
 
-            // $notification->delete();
+            $notification->delete();
         });
     }
 

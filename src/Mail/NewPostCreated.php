@@ -7,6 +7,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Riari\Forum\Models\ForumSubscription;
 use Riari\Forum\Models\Post;
 
 class NewPostCreated extends Mailable
@@ -24,15 +25,22 @@ class NewPostCreated extends Mailable
     public $user;
 
     /**
+     * @var ForumSubscription
+     */
+    public $subscription;
+
+    /**
      * Create a new message instance.
      *
      * @param Post $post
      * @param User $user
+     * @param ForumSubscription $subscription
      */
-    public function __construct(Post $post, User $user)
+    public function __construct(Post $post, User $user, ForumSubscription $subscription)
     {
         $this->post = $post;
         $this->user = $user;
+        $this->subscription = $subscription;
     }
 
     /**
