@@ -83,6 +83,41 @@ class SubscriptionController extends BaseController
     /**
      * @param Request $request
      * @return JsonResponse|\Illuminate\Http\Response
+     * @throws \Exception
+     */
+    public function unsubscribe_email(Request $request)
+    {
+        $this->validate($request, [
+            'subscription_id_encrypted' => ['required'],
+        ]);
+
+        $subscriptionId = decrypt($request->input('subscription_id_encrypted'));
+
+        $subscription = (new ForumSubscription())->newQuery()
+            ->where('id', $subscriptionId)
+            ->first();
+
+        $status = false;
+        $subscribable = null;
+
+        if ($subscription) {
+            $subscription->delete();
+
+            $subscribable = $subscription->subscribable;
+
+            $status = true;
+        }
+
+        return $this->response([
+            'success' => $status,
+            'subscription' => $subscription,
+            'subscribable' => $subscribable,
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse|\Illuminate\Http\Response
      */
     public function isSubscribed(Request $request)
     {

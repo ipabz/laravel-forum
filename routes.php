@@ -11,7 +11,9 @@ $r->group([
     $r->group(['prefix' => 'subscription', 'as' => 'subscription.'], function($r) {
         $r->post('subscribe', ['as' => 'subscribe', 'uses' => 'SubscriptionController@subscribe']);
         $r->post('unsubscribe', ['as' => 'unsubscribe', 'uses' => 'SubscriptionController@unsubscribe']);
+        $r->post('unsubscribe_email', ['as' => 'unsubscribe_email', 'uses' => 'SubscriptionController@unsubscribe_email']);
         $r->post('is_subscribed', ['as' => 'is_subscribed', 'uses' => 'SubscriptionController@isSubscribed']);
+
     });
 
     // Categories
