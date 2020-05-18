@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
+use Riari\Forum\Console\Commands\NotifySubscribers;
 use Riari\Forum\Console\Commands\RefreshStats;
 use Riari\Forum\Http\Middleware\APIAuth;
 use Riari\Forum\Models\Post;
@@ -23,6 +24,7 @@ class ForumServiceProvider extends ServiceProvider
     public function register()
     {
         $this->commands([RefreshStats::class]);
+        $this->commands([NotifySubscribers::class]);
     }
 
     /**
@@ -51,6 +53,8 @@ class ForumServiceProvider extends ServiceProvider
 
         $this->loadMigrationsFrom($this->baseDir() . 'migrations');
         $this->loadTranslationsFrom($this->baseDir() . 'translations', 'forum');
+
+        $this->loadViewsFrom($this->baseDir() . 'views', 'forum');
     }
 
     /**

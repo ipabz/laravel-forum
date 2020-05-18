@@ -28,4 +28,14 @@ class ForumSubscription extends BaseModel
     {
         return $this->morphTo();
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        $model = config('forum.integration.user_model');
+
+        return $this->belongsTo($model, 'user_id');
+    }
 }

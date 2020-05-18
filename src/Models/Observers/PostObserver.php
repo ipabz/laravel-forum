@@ -1,6 +1,7 @@
 <?php namespace Riari\Forum\Models\Observers;
 
 use Carbon\Carbon;
+use Riari\Forum\Models\ForumNotification;
 use Riari\Forum\Support\Stats;
 
 class PostObserver
@@ -25,6 +26,12 @@ class PostObserver
         $category = $post->thread->category;
         $category->post_count += 1;
         $category->saveWithoutTouch();
+
+        // Prepare for notification
+        ForumNotification::create([
+            'post_id' => $post->id,
+            'status' => 'pending',
+        ]);
     }
 
     public function deleted($post)
