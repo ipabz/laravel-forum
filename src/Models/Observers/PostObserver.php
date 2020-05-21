@@ -2,6 +2,8 @@
 
 use Carbon\Carbon;
 use Riari\Forum\Models\ForumNotification;
+use Riari\Forum\Models\ForumSubscription;
+use Riari\Forum\Models\Thread;
 use Riari\Forum\Support\Stats;
 
 class PostObserver
@@ -32,6 +34,23 @@ class PostObserver
             'post_id' => $post->id,
             'status' => 'pending',
         ]);
+
+        // Subscribe thread author if not subscribe.
+        if ($post->thread->author_id === $post->author_id) {
+            $subscription = (new ForumSubscription())->newQuery()
+                ->where('subscribable_id', $post->thread_id)
+                ->where('subscribable_type', Thread::class)
+                ->where('user_id', $post->author_id)
+                ->first();
+
+            if (!$subscription) {
+                ForumSubscription::create([
+                    'subscribable_id' => $post->thread_id,
+                    'subscribable_type' => Thread::class,
+                    'user_id' => $post->author_id,
+                ]);
+            }
+        }
     }
 
     public function deleted($post)
