@@ -41,12 +41,25 @@ class NotifySubscribers extends Command
 
             $post = $notification->post;
             $subscriptions = $post->thread->subscription;
+            $isThreadAuthorSubscribed = false;
 
             $subscriptions->each(function ($subscription) use ($post) {
                 if ($post->author_id !== $subscription->user_id) {
                     Mail::to($subscription->user)->send(new NewPostCreated($post, $subscription->user, $subscription));
                 }
             });
+
+            foreach ($subscriptions as $subscription) {
+                if ($post->thread->author_id === $subscription->user_id) {
+                    $isThreadAuthorSubscribed = true;
+                }
+            }
+
+            if (!$isThreadAuthorSubscribed) {
+                if ($post->author_id !== $post->thread->author_id) {
+                    Mail::to($post->thread->author)->send(new NewPostCreated($post, $post->thread->author, null));
+                }
+            }
 
             $notification->delete();
         });

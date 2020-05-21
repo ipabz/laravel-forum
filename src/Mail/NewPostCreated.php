@@ -36,7 +36,7 @@ class NewPostCreated extends Mailable
      * @param User $user
      * @param ForumSubscription $subscription
      */
-    public function __construct(Post $post, User $user, ForumSubscription $subscription)
+    public function __construct(Post $post, User $user, $subscription)
     {
         $this->post = $post;
         $this->user = $user;
