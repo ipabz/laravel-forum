@@ -37,6 +37,10 @@ class CategoryController extends BaseController
     {
         $categories = $this->model()->withRequestScopes($request);
 
+        if ($keyword = $request->input('search_keyword')) {
+            $categories->search($keyword);
+        }
+
         $categories = $categories->get()->filter(function ($category) {
             if ($category->private) {
                 return Gate::allows('view', $category);

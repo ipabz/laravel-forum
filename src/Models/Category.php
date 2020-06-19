@@ -1,11 +1,12 @@
 <?php namespace Riari\Forum\Models;
 
 use Illuminate\Support\Facades\Gate;
+use Riari\Forum\Models\Traits\FullTextSearch;
 use Riari\Forum\Support\Traits\CachesData;
 
 class Category extends BaseModel
 {
-    use CachesData;
+    use CachesData, FullTextSearch;
 
 	/**
 	 * The table associated with the model.
@@ -27,6 +28,11 @@ class Category extends BaseModel
 	 * @var array
 	 */
     protected $fillable = ['category_id', 'title', 'description', 'weight', 'enable_threads', 'private', 'thread_count', 'post_count'];
+
+    /**
+     * @var array
+     */
+    protected $searchable = ['title'];
 
     /**
      * Create a new category model instance.
