@@ -32,7 +32,7 @@ class Category extends BaseModel
     /**
      * @var array
      */
-    protected $searchable = ['title'];
+    protected $searchable = ['title', 'description'];
 
     /**
      * Create a new category model instance.

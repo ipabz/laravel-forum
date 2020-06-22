@@ -4,6 +4,8 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Riari\Forum\Models\Category;
+use Riari\Forum\Models\Post;
+use Riari\Forum\Models\Thread;
 
 class SearchController extends BaseController
 {
@@ -39,6 +41,26 @@ class SearchController extends BaseController
 
         if ($keyword = $request->input('search_keyword')) {
             $categories->search($keyword);
+
+            $matchingThreadCategoryIds = (new Thread())->search($keyword)
+                ->get()
+                ->pluck(['category_id']);
+
+            $threads = (new Post())->search($keyword)
+                ->get()
+                ->pluck(['thread_id']);
+
+            $matchingPostCategoryIds = (new Thread())->whereIn('id', $threads)
+                ->get()
+                ->pluck(['category_id']);
+
+            $ids = $matchingThreadCategoryIds->merge($matchingPostCategoryIds);
+
+            if ($ids) {
+                $categories->orWhere(function($query) use ($ids) {
+                    $query->whereIn('id', $ids);
+                });
+            }
         }
 
         $categories = $categories->get()->filter(function ($category) {

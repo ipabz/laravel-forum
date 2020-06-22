@@ -13,7 +13,7 @@ class FullTextSearchForumTable extends Migration
      */
     public function up()
     {
-        DB::statement('ALTER TABLE forum_categories ADD FULLTEXT fc_fulltext_index (title)');
+        DB::statement('ALTER TABLE forum_categories ADD FULLTEXT fc_fulltext_index (title, description)');
         DB::statement('ALTER TABLE forum_threads ADD FULLTEXT ft_fulltext_index (title)');
         DB::statement('ALTER TABLE forum_posts ADD FULLTEXT fp_fulltext_index (content)');
     }
