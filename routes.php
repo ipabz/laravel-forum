@@ -7,6 +7,11 @@ $r->group([
     'middleware' => config('forum.routing.middleware', 'forum.api.auth')
 ], function ($r)
 {
+    // Search
+    $r->group(['prefix' => 'search', 'as' => 'search.'], function($r) {
+        $r->get('/', ['as' => 'index', 'uses' => 'SearchController@index']);
+    });
+
     // Subscription
     $r->group(['prefix' => 'subscription', 'as' => 'subscription.'], function($r) {
         $r->post('subscribe', ['as' => 'subscribe', 'uses' => 'SubscriptionController@subscribe']);
