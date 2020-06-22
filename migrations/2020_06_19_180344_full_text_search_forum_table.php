@@ -14,6 +14,8 @@ class FullTextSearchForumTable extends Migration
     public function up()
     {
         DB::statement('ALTER TABLE forum_categories ADD FULLTEXT fc_fulltext_index (title)');
+        DB::statement('ALTER TABLE forum_threads ADD FULLTEXT ft_fulltext_index (title)');
+        DB::statement('ALTER TABLE forum_posts ADD FULLTEXT fp_fulltext_index (content)');
     }
 
     /**
@@ -24,5 +26,7 @@ class FullTextSearchForumTable extends Migration
     public function down()
     {
         DB::statement('ALTER TABLE forum_categories DROP INDEX fc_fulltext_index;');
+        DB::statement('ALTER TABLE forum_threads DROP INDEX ft_fulltext_index;');
+        DB::statement('ALTER TABLE forum_posts DROP INDEX fp_fulltext_index;');
     }
 }
