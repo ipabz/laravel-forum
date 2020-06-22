@@ -1,12 +1,13 @@
 <?php namespace Riari\Forum\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Riari\Forum\Models\Traits\FullTextSearch;
 use Riari\Forum\Models\Traits\HasAuthor;
 use Riari\Forum\Support\Traits\CachesData;
 
 class Post extends BaseModel
 {
-    use SoftDeletes, HasAuthor, CachesData;
+    use SoftDeletes, HasAuthor, CachesData, FullTextSearch;
 
     /**
      * The table associated with the model.
@@ -26,6 +27,11 @@ class Post extends BaseModel
 	 * @var array
 	 */
     protected $fillable = ['thread_id', 'author_id', 'post_id', 'content'];
+
+    /**
+     * @var array
+     */
+    protected $searchable = ['content'];
 
     /**
      * Create a new post model instance.

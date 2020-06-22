@@ -4,12 +4,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Gate;
 use Riari\Forum\Models\Category;
 use Riari\Forum\Models\Post;
+use Riari\Forum\Models\Traits\FullTextSearch;
 use Riari\Forum\Models\Traits\HasAuthor;
 use Riari\Forum\Support\Traits\CachesData;
 
 class Thread extends BaseModel
 {
-    use SoftDeletes, HasAuthor, CachesData;
+    use SoftDeletes, HasAuthor, CachesData, FullTextSearch;
 
     /**
      * Eloquent attributes
@@ -37,6 +38,11 @@ class Thread extends BaseModel
      * @var string
      */
     const STATUS_UPDATED = 'updated';
+
+    /**
+     * @var array
+     */
+    protected $searchable = ['title'];
 
     /**
      * Create a new thread model instance.
