@@ -91,7 +91,7 @@ abstract class BaseModel extends Model
      */
     public function getPostedAttribute()
     {
-        return $this->created_at->diffForHumans();
+        return $this->created_at->toFormattedDateString();
     }
 
     /**
@@ -101,7 +101,7 @@ abstract class BaseModel extends Model
      */
     public function getUpdatedAttribute()
     {
-        return $this->updated_at->diffForHumans();
+        return $this->updated_at->toFormattedDateString();
     }
 
     /**
