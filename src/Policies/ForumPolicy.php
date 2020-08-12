@@ -10,7 +10,7 @@ class ForumPolicy
      */
     public function createCategories($user)
     {
-        return $user->hasRole('ROLE_ADMIN');
+        return $user->is_admin;
     }
 
     /**
@@ -44,7 +44,7 @@ class ForumPolicy
      */
     public function renameCategories($user)
     {
-        return $user->hasRole('ROLE_ADMIN');
+        return $user->is_admin;
     }
 
     /**
