@@ -96,7 +96,7 @@ class ThreadController extends BaseController
             return $this->buildFailedValidationResponse($request, trans('forum::validation.category_threads_enabled'));
         }
 
-        $thread = $this->model()->create($request->only(['category_id', 'author_id', 'title']));
+        $thread = $this->model()->create($request->only(['category_id', 'author_id', 'title', 'anonymous']));
         Post::create(['thread_id' => $thread->id] + $request->only('author_id', 'content', 'anonymous'));
 
         return $this->response($thread, 201);
