@@ -97,7 +97,7 @@ class ThreadController extends BaseController
         }
 
         $thread = $this->model()->create($request->only(['category_id', 'author_id', 'title']));
-        Post::create(['thread_id' => $thread->id] + $request->only('author_id', 'content'));
+        Post::create(['thread_id' => $thread->id] + $request->only('author_id', 'content', 'anonymous'));
 
         return $this->response($thread, 201);
     }

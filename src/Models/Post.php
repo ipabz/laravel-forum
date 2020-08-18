@@ -26,7 +26,7 @@ class Post extends BaseModel
 	 *
 	 * @var array
 	 */
-    protected $fillable = ['thread_id', 'author_id', 'post_id', 'content'];
+    protected $fillable = ['anonymous', 'thread_id', 'author_id', 'post_id', 'content'];
 
     /**
      * @var array
