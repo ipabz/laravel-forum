@@ -26,10 +26,19 @@ trait HasAuthor
     {
         $attribute = config('forum.integration.user_name');
 
+        $author = null;
+
         if (!is_null($this->author)) {
-            return $this->author->$attribute;
+            $author = $this->author->$attribute;
         }
 
-        return null;
+        if($this->anonymous) {
+            $text = 'Anonymous';
+            $text .= (auth()->user() && auth()->user()->is_admin) ? '<br/>(' . $author . ')' : '';
+        } else {
+            $text = $author;
+        }
+
+        return $text;
     }
 }
